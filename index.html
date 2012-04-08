@@ -28,7 +28,7 @@
 	<![endif]-->
 
 </head>
-<body>
+<body onload="onload()">
 
 	<!-- container -->
 	<div class="container">
@@ -41,6 +41,25 @@
 		</div>
 
     <div class="row">
+      <div id="viewer"></div>
+      <br><br> 
+      <textarea id="code">
+        function main() {
+          var resolution = 24; // increase to get smoother corners (will get slow!)
+
+          var cube1 = CSG.roundedCube({center: [0,0,0], radius: [10,10,10], roundradius: 2, resolution: resolution});
+          var sphere1 = CSG.sphere({center: [5, 5, 5], radius: 10, resolution: resolution });
+          var sphere2 = sphere1.translate([12, 5, 0]);
+          var sphere3 = CSG.sphere({center: [20, 0, 0], radius: 30, resolution: resolution });
+  
+          var result = cube1;
+          result = result.union(sphere1);
+          result = result.subtract(sphere2);
+          result = result.intersect(sphere3);
+
+          return result;
+        }
+      </textarea>
     </div>
 
 	</div>
@@ -59,6 +78,24 @@
 	<script src="javascripts/csg.js"></script>
 	<script src="javascripts/openjscad.js"></script>
 
+  <script>
+
+var gProcessor=null;
+
+// Show all exceptions to the user:
+OpenJsCad.AlertUserOfUncaughtExceptions();
+
+function onload()
+{
+  gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
+  updateSolid();
+}
+
+function updateSolid()
+{
+  gProcessor.setJsCad(document.getElementById('code').value);
+}
+</script>
 
 </body>
 </html>
