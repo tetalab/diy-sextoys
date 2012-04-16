@@ -636,7 +636,7 @@ OpenJsCad.Processor.prototype = {
       }
       var control = this.paramControls[i];
       var value;
-      if( (type == "text") || (type == "float") || (type == "int") )
+      if( (type == "text") || (type == "float") || (type == "int") || (type == "slider"))
       {
         value = control.value;
         if( (type == "float") || (type == "int") )
@@ -863,12 +863,12 @@ OpenJsCad.Processor.prototype = {
       {
         type = paramdef.type;
       }
-      if( (type !== "text") && (type !== "int") && (type !== "float") && (type !== "choice") )
+      if( (type !== "text") && (type !== "int") && (type !== "float") && (type !== "choice") && (type !== "slider") )
       {
         throw new Error(errorprefix + "Unknown parameter type '"+type+"'");
       }
       var control;
-      if( (type == "text") || (type == "int") || (type == "float") )
+      if( (type == "text") || (type == "int") || (type == "float") || (type == "slider") )
       {
         control = document.createElement("input");
         control.type = "text";
