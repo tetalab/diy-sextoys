@@ -35,6 +35,22 @@ textarea:focus {
 
 canvas { cursor: move; }
 
+.parametersdiv {
+  border: 1px solid rgb(200,200,200);
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.parametersdiv .header {
+  font-weight: bold;
+}
+
+.statusdiv {
+  width: 800px;
+  margin-bottom: 10px;
+}
 
 
 /* -----------------------------------------
