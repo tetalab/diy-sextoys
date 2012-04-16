@@ -100,18 +100,19 @@ OpenJsCad.AlertUserOfUncaughtExceptions();
 
 function loadSolid() {
   gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
-  $(".parameterstable input").html("123");
-  $(".slider").slider({
-    value:5,
-    min: 0,
-    max: 20,
-    slide: function( event, ui ) {
-      updateSolid();
-    }
-  });
-  updateSolid();
+  gProcessor.setJsCad(document.getElementById('code').value);
+  setSliders();
 }
 
-function updateSolid() {
-  gProcessor.setJsCad(document.getElementById('code').value);
+function setSliders() {
+  $(".slider").slider();
+  $.each($(".slider"), function(){
+    $(this).slider("option", {
+      value:  $(this).attr("data-value"),
+      min: $(this).attr("data-min"),
+      slide: function( event, ui ) {
+        $(this).parent().find("input").val($(this).slider("option", "value"));
+      }
+    });
+  });
 }

@@ -27,6 +27,8 @@
 		<script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
 
+  <link type="text/css" href="stylesheets/ui-lightness/jquery-ui-1.8.18.custom.css" rel="stylesheet" />	
+
 </head>
 <body onload="loadSolid()">
 
@@ -45,36 +47,37 @@
 
     <div class="row">
       <textarea id="code">
-        function getParameterDefinitions() {
-          return [
-            { name: 'radius', caption: 'radius:', type: 'slider', default: 5 },
-            { name: 'height', caption: 'height:', type: 'int', default: 10 },
-            { name: 'end', caption: 'top size:', type: 'int', default: 5 },
-            { name: 'start', caption: 'bottom size:', type: 'int', default: 7 },
-            { name: 'resolution', caption: 'resolution:', type: 'int', default: 32 },
-          ];
-        }
+function getParameterDefinitions() {
+  return [
+    { name: 'radius', caption: 'radius:', type: 'slider', value: 5, min: 0, max: 30, step: 1 },
+    { name: 'height', caption: 'height:', type: 'slider', value: 10, min: 0, max: 30, step: 1 },
+    { name: 'end', caption: 'top size:', type: 'slider', value: 5, min: 0, max: 30, step: 1 },
+    { name: 'start', caption: 'bottom size:', type: 'slider', value: 7, min: 0, max: 30, step: 1 },
+    { name: 'resolution', caption: 'resolution:', type:'slider', value: 32, min: 0, max: 30, step: 1 },
+  ];
+}
 
-        function main(params) {
-          var cylinder = CSG.cylinder({
-            start: [0, 0, 0],
-            end: [0, params.height, 0],
-            radiusEnd: params.end,
-            radiusStart: params.start,
-            resolution: params.resolution
-          });
+function main(params) {
 
-          var sphere = CSG.sphere({
-            center: [0, params.height, 0],
-            radius: params.radius,
-            resolution: params.resolution
-          });
+  var cylinder = CSG.cylinder({
+    start: [0, 0, 0],
+    end: [0, params.height, 0],
+    radiusEnd: params.end,
+    radiusStart: params.start,
+    resolution: params.resolution
+  });
 
-          result = cylinder;
-          result = result.union(sphere);
-          result = result.setColor(0.99, 0.25, 0.45)
-          return result;
-        }
+  var sphere = CSG.sphere({
+    center: [0, params.height, 0],
+    radius: params.radius,
+    resolution: params.resolution
+  });
+
+  result = cylinder;
+  result = result.union(sphere);
+  result = result.setColor(0.99, 0.25, 0.45)
+  return result;
+}
       </textarea>
     </div>
 

@@ -528,16 +528,13 @@ OpenJsCad.Processor.prototype = {
     var headerdiv = document.createElement("div");
     headerdiv.innerText = "Parameters:";
     headerdiv.className = "header";
-    this.parametersdiv.appendChild(headerdiv);
-    this.parameterstable = document.createElement("table");
-    this.parameterstable.className = "parameterstable";
-    this.parametersdiv.appendChild(this.parameterstable);
+    //this.parametersdiv.appendChild(headerdiv);
     var parseParametersButton = document.createElement("button");
     parseParametersButton.innerHTML = "Update";
     parseParametersButton.onclick = function(e) {
       that.rebuildSolid();
     };
-    this.parametersdiv.appendChild(parseParametersButton);
+    //this.parametersdiv.appendChild(parseParametersButton);
     this.enableItems();    
     //this.containerdiv.appendChild(this.statusdiv);
     //this.containerdiv.appendChild(this.errordiv);
@@ -846,8 +843,8 @@ OpenJsCad.Processor.prototype = {
   },
   
   createParamControls: function() {
-    this.parameterstable.innerHTML = "";
     this.paramControls = [];
+    var paramView = [];
     var paramControls = [];
     var tablerows = [];
     for(var i = 0; i < this.paramDefinitions.length; i++)
@@ -868,7 +865,8 @@ OpenJsCad.Processor.prototype = {
         throw new Error(errorprefix + "Unknown parameter type '"+type+"'");
       }
       var control;
-      if( (type == "text") || (type == "int") || (type == "float") || (type == "slider") )
+      var slider = null;
+      if( (type == "text") || (type == "int") || (type == "float"))
       {
         control = document.createElement("input");
         control.type = "text";
@@ -887,6 +885,31 @@ OpenJsCad.Processor.prototype = {
             control.value = "";
           }
         }
+      }
+      else if(type == "slider")
+      {
+        control = document.createElement("input");
+        control.type = "hidden";
+        control.value = paramdef.value;
+
+        slider = document.createElement("div");
+        slider.className = "slider";
+
+        var sliderValue = document.createAttribute("data-value");
+        sliderValue.nodeValue = paramdef.value;
+        slider.setAttributeNode(sliderValue);
+
+        var sliderMin = document.createAttribute("data-min");
+        sliderMin.nodeValue = paramdef.min;
+        slider.setAttributeNode(sliderMin);
+
+        var sliderMax = document.createAttribute("data-max");
+        sliderMax.nodeValue = paramdef.Max;
+        slider.setAttributeNode(sliderMax);
+
+        var sliderStep = document.createAttribute("data-step");
+        sliderStep.nodeValue = paramdef.step;
+        slider.setAttributeNode(sliderStep);
       }
       else if(type == "choice")
       {
@@ -930,25 +953,38 @@ OpenJsCad.Processor.prototype = {
         }        
       }
       paramControls.push(control);
-      var tr = document.createElement("tr");
-      var td = document.createElement("td");
+      var paramDiv = document.createElement("div");
+      paramDiv.className = "parameter";
       var label = paramdef.name + ":";
       if('caption' in paramdef)
       {
         label = paramdef.caption;
       }
        
-      td.innerHTML = label;
-      tr.appendChild(td);
-      td = document.createElement("td");
-      td.appendChild(control);
-      tr.appendChild(td);
-      tablerows.push(tr);
+      paramDiv.innerHTML = label;
+
+      var paramInput = document.createElement("div");
+      paramInput.className = "paramInput";
+      paramInput.appendChild(control);
+      if(slider != null)
+      {
+        paramInput.appendChild(slider);
+      }
+      paramDiv.appendChild(paramInput);
+      paramView.push(paramDiv);
     }
-    var that = this;
-    tablerows.map(function(tr){
-      that.parameterstable.appendChild(tr);
-    }); 
+    if(this.parametersdiv.innerHTML.length == 0) {
+      var that = this;
+      paramView.map(function(div){
+        that.parametersdiv.appendChild(div);
+      });
+      var parseParametersButton = document.createElement("button");
+      parseParametersButton.innerHTML = "Update";
+      parseParametersButton.onclick = function(e) {
+        that.rebuildSolid();
+      };
+      that.parametersdiv.appendChild(parseParametersButton);
+    }
     this.paramControls = paramControls;
   },
 };
