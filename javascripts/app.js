@@ -111,7 +111,9 @@ function setSliders() {
       value:  $(this).attr("data-value"),
       min: $(this).attr("data-min"),
       slide: function( event, ui ) {
-        $(this).parent().find("input").val($(this).slider("option", "value"));
+        var value = $(this).slider("option", "value");
+        $(this).parent().find("input").val(value);
+        $(this).parents(".parameter").find(".value").html(value);
       }
     });
   });

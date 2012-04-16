@@ -968,6 +968,7 @@ OpenJsCad.Processor.prototype = {
       paramInput.appendChild(control);
       if(slider != null)
       {
+        paramDiv.innerHTML += "<span class='value'>" + slider.getAttributeNode("data-value").value + "</span>";
         paramInput.appendChild(slider);
       }
       paramDiv.appendChild(paramInput);
