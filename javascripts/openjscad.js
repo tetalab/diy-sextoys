@@ -47,7 +47,7 @@ OpenJsCad.Viewer = function(containerelement, width, height, initialdepth) {
 
   // Set up WebGL state
   gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-  gl.clearColor(0.93, 0.93, 0.93, 1);
+  gl.clearColor(0, 0, 0, 1);
   gl.enable(gl.DEPTH_TEST);
   gl.enable(gl.CULL_FACE);
   gl.polygonOffset(1, 1);
@@ -485,7 +485,7 @@ OpenJsCad.Processor.prototype = {
     viewerdiv.className = "viewer nine columns";
     viewerdiv.style.width = this.viewerwidth + "px";
     viewerdiv.style.height = this.viewerheight + "px";
-    viewerdiv.style.backgroundColor = "rgb(200,200,200)";
+    viewerdiv.style.backgroundColor = "rgb(0,0,0)";
     this.containerdiv.appendChild(viewerdiv);
     this.viewerdiv = viewerdiv;
     try

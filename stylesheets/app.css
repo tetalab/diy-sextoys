@@ -14,11 +14,23 @@
    Shared Styles
 ----------------------------------------- */
 
+body {
+  background: #000;
+}
+
+.title {
+  color: #ED0972;
+}
+
+hr {
+  border-color: #FFFBCB;
+}
+
 pre, code, textarea {
   font: 12px/20px Monaco, monospace;
   border: 1px solid #CCC;
   border-radius: 3px;
-  background: #F9F9F9;
+  background: #FCC8B4;
   padding: 0 3px;
   color: #555;
 }
@@ -33,7 +45,9 @@ textarea:focus {
   outline: none;
 }
 
-canvas { cursor: move; }
+canvas {
+  cursor: move;
+}
 
 .parametersdiv {
   border: 1px solid rgb(200,200,200);
