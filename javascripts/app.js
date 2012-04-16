@@ -90,6 +90,28 @@ jQuery(document).ready(function ($) {
 
 	/* DISABLED BUTTONS ------------- */
 	/* Gives elements with a class of 'disabled' a return: false; */
-  
 
 });
+
+var gProcessor=null;
+
+// Show all exceptions to the user:
+OpenJsCad.AlertUserOfUncaughtExceptions();
+
+function loadSolid() {
+  gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
+  $(".parameterstable input").html("123");
+  $(".slider").slider({
+    value:5,
+    min: 0,
+    max: 20,
+    slide: function( event, ui ) {
+      updateSolid();
+    }
+  });
+  updateSolid();
+}
+
+function updateSolid() {
+  gProcessor.setJsCad(document.getElementById('code').value);
+}

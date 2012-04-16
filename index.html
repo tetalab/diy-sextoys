@@ -28,7 +28,7 @@
   <![endif]-->
 
 </head>
-<body onload="onload()">
+<body onload="loadSolid()">
 
 	<!-- container -->
 	<div class="container">
@@ -40,16 +40,17 @@
 			</div>
 		</div>
 
+    <div id="viewer" class="row">
+    </div>
+
     <div class="row">
-      <div id="viewer"></div>
-      <br><br> 
       <textarea id="code">
         function getParameterDefinitions() {
           return [
-            { name: 'height', caption: 'Sextoys height:', type: 'int', default: 10 },
-            { name: 'end', caption: 'Sextoys top size:', type: 'int', default: 5 },
-            { name: 'start', caption: 'Sextoys bottom size:', type: 'int', default: 7 },
-            { name: 'resolution', caption: 'Sextoys resolution:', type: 'int', default: 32 },
+            { name: 'height', caption: 'height:', type: 'int', default: 10 },
+            { name: 'end', caption: 'top size:', type: 'int', default: 5 },
+            { name: 'start', caption: 'bottom size:', type: 'int', default: 7 },
+            { name: 'resolution', caption: 'resolution:', type: 'int', default: 32 },
           ];
         }
 
@@ -84,34 +85,13 @@
 
 	<!-- Included JS Files -->
 	<script src="javascripts/jquery.min.js"></script>
+	<script src="javascripts/jquery-ui.min.js"></script>
 	<script src="javascripts/modernizr.foundation.js"></script>
 	<script src="javascripts/foundation.js"></script>
-  <script src="javascripts/app.js"></script>
-
   <script src="javascripts/lightgl.js"></script>
   <script src="javascripts/csg.js"></script>
   <script src="javascripts/openjscad.js"></script>
-
-
-  <script>
-
-    var gProcessor=null;
-
-    // Show all exceptions to the user:
-    OpenJsCad.AlertUserOfUncaughtExceptions();
-
-    function onload()
-    {
-      gProcessor = new OpenJsCad.Processor(document.getElementById("viewer"));
-      updateSolid();
-    }
-
-    function updateSolid()
-    {
-      gProcessor.setJsCad(document.getElementById('code').value);
-    }
-
-  </script>
+  <script src="javascripts/app.js"></script>
 
 </body>
 </html>

@@ -453,8 +453,8 @@ OpenJsCad.Processor = function(containerdiv, onchange) {
   this.onchange = onchange;
   this.viewerdiv = null;
   this.viewer = null;
-  this.viewerwidth = 800;
-  this.viewerheight = 600;
+  this.viewerwidth = 700;
+  this.viewerheight = 450;
   this.initialViewerDistance = 50;
   this.processing = false;
   this.solid = null;
@@ -482,7 +482,7 @@ OpenJsCad.Processor.prototype = {
       this.containerdiv.appendChild(div);
     }
     var viewerdiv = document.createElement("div");
-    viewerdiv.className = "viewer";
+    viewerdiv.className = "viewer nine columns";
     viewerdiv.style.width = this.viewerwidth + "px";
     viewerdiv.style.height = this.viewerheight + "px";
     viewerdiv.style.backgroundColor = "rgb(200,200,200)";
@@ -524,7 +524,7 @@ OpenJsCad.Processor.prototype = {
     this.downloadStlLink.innerHTML = "Download STL";
     this.statusbuttons.appendChild(this.downloadStlLink);
     this.parametersdiv = document.createElement("div");
-    this.parametersdiv.className = "parametersdiv";
+    this.parametersdiv.className = "parametersdiv three columns";
     var headerdiv = document.createElement("div");
     headerdiv.innerText = "Parameters:";
     headerdiv.className = "header";
@@ -539,8 +539,8 @@ OpenJsCad.Processor.prototype = {
     };
     this.parametersdiv.appendChild(parseParametersButton);
     this.enableItems();    
-    this.containerdiv.appendChild(this.statusdiv);
-    this.containerdiv.appendChild(this.errordiv);
+    //this.containerdiv.appendChild(this.statusdiv);
+    //this.containerdiv.appendChild(this.errordiv);
     this.containerdiv.appendChild(this.parametersdiv);
     this.clearViewer();
   },
