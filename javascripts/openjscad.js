@@ -311,7 +311,7 @@ OpenJsCad.javaScriptToSolidASync = function(script, mainParameters, callback) {
     "csg.js",
     "openjscad.js"
   ];
-  var baseurl = document.location + "";
+  var baseurl = document.location + "javascripts/";
   var workerscript = "";
   workerscript += script;
   workerscript += "\n\n\n\n//// The following code is added by OpenJsCad:\n";
