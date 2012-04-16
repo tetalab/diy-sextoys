@@ -47,6 +47,7 @@
       <textarea id="code">
         function getParameterDefinitions() {
           return [
+            { name: 'radius', caption: 'radius:', type: 'int', default: 5 },
             { name: 'height', caption: 'height:', type: 'int', default: 10 },
             { name: 'end', caption: 'top size:', type: 'int', default: 5 },
             { name: 'start', caption: 'bottom size:', type: 'int', default: 7 },
@@ -65,7 +66,7 @@
 
           var sphere = CSG.sphere({
             center: [0, params.height, 0],
-            radius: params.end,
+            radius: params.radius,
             resolution: params.resolution
           });
 
